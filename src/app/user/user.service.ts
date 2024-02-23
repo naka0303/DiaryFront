@@ -1,18 +1,18 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse, HttpStatusCode } from "@angular/common/http";
 import { Injectable, NgModule } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, catchError, map } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private GET_USER_URL = 'http://localhost:8081/v1/users/2';
+  private GET_USER_URL = 'http://localhost:8081/v1/users';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(this.GET_USER_URL);
+  getUser(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.GET_USER_URL}/${userId}`);
   }
 }
 
