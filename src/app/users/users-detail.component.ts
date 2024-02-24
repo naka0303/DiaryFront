@@ -1,16 +1,16 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { User, UserService } from './user.service';
+import { DetailUser, UsersService } from '../users/users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css',
+  templateUrl: './users-detail.component.html',
+  styleUrl: './users-detail.component.css',
   imports: [NgFor, NgIf],
 })
-export class UserComponent implements OnInit {
+export class UsersDetailComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
   diaryId!: number;
 
   constructor(
-    private userService: UserService,
+    private usersService: UsersService
   ) {
     this.userId = Number(this.route.snapshot.params['userId']);
   }
@@ -33,8 +33,12 @@ export class UserComponent implements OnInit {
     this.getUser(this.userId);
   }
 
+  /**
+   * 特定ユーザー情報取得
+   * @param userId ユーザーID
+   */
   getUser(userId: number): void {
-    this.userService.getUser(userId)
+    this.usersService.getUser(userId)
       .subscribe(res => {
           this.userId = res.userId;
           this.username = res.username;

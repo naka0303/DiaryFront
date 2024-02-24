@@ -1,7 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Users, UsersService } from './users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   standalone: true,
