@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { DetailUser, UsersService } from '../users/users.service';
+import { DetailUser, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 

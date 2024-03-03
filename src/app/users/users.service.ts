@@ -8,6 +8,7 @@ export class UsersService {
   private GET_USERS_URL = 'http://localhost:8081/v1/users';
   private GET_USER_URL = 'http://localhost:8081/v1/users';
   private REGISTER_USER_URL = 'http://localhost:8081/v1/users';
+  private DELETE_USER_URL = 'http://localhost:8081/v1/users';
 
   constructor(
     private http: HttpClient
@@ -37,6 +38,15 @@ export class UsersService {
    */
   registerUser(registerUser: any) {
     return this.http.post(`${this.REGISTER_USER_URL}`, registerUser);
+  }
+
+  /**
+   * 特定ユーザー情報削除
+   * @param userId 
+   * @returns 
+   */
+  deleteUser(userId: number) {
+    return this.http.delete(`${this.DELETE_USER_URL}/${userId}`) ;
   }
 }
 

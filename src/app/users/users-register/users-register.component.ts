@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { RegisterUser, UsersService } from '../users/users.service';
+import { RegisterUser, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {  FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
@@ -55,7 +55,10 @@ export class UsersRegisterComponent implements OnInit {
 
     this.usersService.registerUser(registerUser)
       .subscribe(res => {
-        console.log(res);
-      })
+        // TODO: ステータスコードの直書きはやめる
+        if (res === "OK") {
+          this.ngOnInit();
+        }
+      });
   }
 }
