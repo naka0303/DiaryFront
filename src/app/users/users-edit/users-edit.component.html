@@ -1,0 +1,24 @@
+<h1 class="card-title">{{ title }}</h1>
+<form style="width: 100%;" [formGroup]="userForm" (ngSubmit)="onEditUser()">
+  <div>
+    <label>ユーザー名：</label>
+    <input style="width: 25%;" type="text" formControlName="username" [(ngModel)]="username" class="form-control">
+  </div>
+  <div>
+    <label>年齢：</label>
+    <input style="width: 5%;" type="number" formControlName="age" [(ngModel)]="age" class="form-control">
+  </div>
+  <div>
+    <label>メールアドレス：</label>
+    <input style="width: 25%;" type="email" formControlName="email" [(ngModel)]="email" class="form-control">
+  </div>
+  <div>
+    <label>パスワード：</label>
+    <input style="width: 25%;" type="password" formControlName="password" class="form-control">
+  </div>
+  <div>
+    <label>権限：</label>
+    <input style="width: 5%;" type="text" formControlName="auth" [(ngModel)]="auth" class="form-control">
+  </div>
+  <button mat-raised-button color="primary">編集する</button>
+</form>

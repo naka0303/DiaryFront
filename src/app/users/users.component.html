@@ -11,6 +11,7 @@
       <td><a [routerLink]="['/users-detail', user.userId]">{{ user.userId }}</a></td>
       <td>{{ user.username }}</td>
       <td><button type="button" (click)="onDeleteUser(user.userId)">削除</button></td>
+      <td><button type="button" [routerLink]="['/users-edit', user.userId]">編集</button></td>
     </tr>
   </tbody>
 </table>
