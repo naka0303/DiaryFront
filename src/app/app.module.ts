@@ -5,6 +5,8 @@ import { UsersComponent } from "./users/users.component";
 import { UsersDetailComponent } from "./users/users-detail/users-detail.component";
 import { UsersRegisterComponent } from "./users/users-register/users-register.component";
 import { UsersEditComponent } from "./users/users-edit/users-edit.component";
+import { HeaderComponent } from "./header/header.component";
+import { AppComponent } from "./app.component";
 
 export const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -19,8 +21,10 @@ export const routes: Routes = [
     RouterModule.forRoot(routes),
   ],
 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   declarations: [
-    // AppComponent
+    HeaderComponent
   ],
 
   providers: [],

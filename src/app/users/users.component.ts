@@ -1,8 +1,8 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule, OnInit, inject } from '@angular/core';
 import { Users, UsersService } from './users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { Subject, filter, takeUntil } from 'rxjs';
+
 
 @Component({
   standalone: true,
@@ -10,6 +10,7 @@ import { Subject, filter, takeUntil } from 'rxjs';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
   imports: [NgFor, NgIf, RouterLink],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UsersComponent implements OnInit {
 

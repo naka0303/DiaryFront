@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EditUser, UsersService } from '../users.service';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-users-edit',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],
   templateUrl: './users-edit.component.html',
   styleUrl: './users-edit.component.css'
 })

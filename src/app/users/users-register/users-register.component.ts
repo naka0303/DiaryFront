@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { RegisterUser, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {  FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import {  FormBuilder, FormGroup, FormControl, Validators, AbstractControl, Reac
   selector: 'app-users',
   templateUrl: './users-register.component.html',
   styleUrl: './users-register.component.css',
-  imports: [NgFor, NgIf, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],
 })
 export class UsersRegisterComponent implements OnInit {
 
