@@ -1,0 +1,13 @@
+<h1 class="card-title">{{ title }}</h1>
+<form style="width: 100%;" [formGroup]="userForm" (ngSubmit)="login(userForm.value)">
+  <div>
+    <label>ユーザー名：</label>
+    <input style="width: 25%;" type="text" formControlName="username">
+  </div>
+  <div>
+    <label>パスワード：</label>
+    <input style="width: 25%;" type="password" formControlName="password">
+  </div>
+  <button mat-raised-button color="primary">ログイン</button>
+</form>
+<a [routerLink]="['/']">ホーム画面へ</a>

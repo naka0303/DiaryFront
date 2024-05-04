@@ -7,12 +7,14 @@ import { UsersRegisterComponent } from "./users/users-register/users-register.co
 import { UsersEditComponent } from "./users/users-edit/users-edit.component";
 import { HeaderComponent } from "./header/header.component";
 import { AppComponent } from "./app.component";
+import { LoginComponent } from "./users/login/login.component";
 
 export const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'users-detail/:userId', component: UsersDetailComponent },
   { path: 'users-edit/:userId', component: UsersEditComponent },
-  { path: 'users-register', component: UsersRegisterComponent }
+  { path: 'users-register', component: UsersRegisterComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

@@ -1,11 +1,13 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, NgModule } from "@angular/core";
+import { log } from "console";
 import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
 
   private ROOT_USERS_URL = 'http://localhost:8081/v1/users';
+  private ROOT_LOGIN_URL = 'http://localhost:8081/v1/login';
 
   constructor(
     private http: HttpClient
@@ -55,6 +57,14 @@ export class UsersService {
   editUser(editUser: any, userId: number) {
     return this.http.put(`${this.ROOT_USERS_URL}/${userId}`, editUser);
   }
+
+  /**
+   * ログイン
+   * @returns 
+   */
+  login(registerUser: any) {
+    return this.http.post(this.ROOT_LOGIN_URL, registerUser);
+  }
 }
 
 export class Users {
@@ -89,4 +99,9 @@ export class EditUser {
   email!: string;
   password!: string;
   auth!: string;
+}
+
+export class LoginUser {
+  username!: string;
+  password!: string;
 }
