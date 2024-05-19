@@ -1,6 +1,6 @@
 import { Router, RouterOutlet } from '@angular/router';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule, OnInit } from '@angular/core';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
@@ -14,9 +14,21 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 export class AppComponent {
   title = 'DiaryFront';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void { 
     this.title = "日記アプリ";
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+      if (localStorage.getItem("loginUsername") !== null
+          && localStorage.getItem("loginIsEnabled") !== null) {
+        this.router.navigate(['']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    }
   }
 }

@@ -40,12 +40,12 @@ export class UsersDetailComponent implements OnInit {
   getUser(userId: number): void {
     this.usersService.getUser(userId)
       .subscribe(res => {
-          this.userId = res.userId;
-          this.username = res.username;
-          this.age = res.age;
-          this.email = res.email;
-          this.auth = res.auth;
-          this.diaryId = res.diaryId;
+        this.userId = res.userId;
+        this.username = res.username;
+        this.age = res.age;
+        this.email = res.email;
+        this.auth = res.auth;
+        this.diaryId = res.diaryId;
     });
   }
 }

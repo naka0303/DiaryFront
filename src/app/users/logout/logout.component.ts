@@ -4,16 +4,15 @@ import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { log } from 'console';
 
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './logout.component.html',
+  styleUrl: './logout.component.css',
   imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink, NgbModule],
 })
-export class LoginComponent implements OnInit {
+export class LogoutComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   loginUser!: any;
@@ -41,35 +40,18 @@ export class LoginComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem("loginUsername") !== null
           && localStorage.getItem("loginIsEnabled") !== null) {
-        this.router.navigate(['']);
+        this.router.navigate(['logout']);
       }
     }
   }
 
   /**
-   * ログイン
-   * @param userId ユーザーID
+   * ログアウト
    */
-  login(form: any) {
-    let username = form.username;
-    let password = form.password;
+  logout() {
+    localStorage.removeItem("loginUsername");
+    localStorage.removeItem("loginIsEnabled");
 
-    var loginUser: LoginUser = new LoginUser();
-    loginUser.username = username;
-    loginUser.password = password;
-
-    this.usersService.login(loginUser)
-      .subscribe(res => {
-        if (res == null) {
-          return false;
-        }
-
-        const jsonParsed = JSON.parse(JSON.stringify(res));
-        localStorage.setItem("loginUsername", jsonParsed.username);
-        localStorage.setItem("loginIsEnabled", jsonParsed.isEnabled);
-
-        this.router.navigate(['']);
-      return true;
-    });
+    this.router.navigate(['login']);
   }
 }

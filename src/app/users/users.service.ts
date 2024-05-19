@@ -8,6 +8,7 @@ export class UsersService {
 
   private ROOT_USERS_URL = 'http://localhost:8081/v1/users';
   private ROOT_LOGIN_URL = 'http://localhost:8081/v1/login';
+  private ROOT_LOGOUT_URL = 'http://localhost:8081/v1/logout';
 
   constructor(
     private http: HttpClient
@@ -62,8 +63,8 @@ export class UsersService {
    * ログイン
    * @returns 
    */
-  login(registerUser: any) {
-    return this.http.post(this.ROOT_LOGIN_URL, registerUser);
+  login(loginUser: any) {
+    return this.http.post(this.ROOT_LOGIN_URL, loginUser);
   }
 }
 
@@ -104,4 +105,5 @@ export class EditUser {
 export class LoginUser {
   username!: string;
   password!: string;
+  isEnabled!: string;
 }

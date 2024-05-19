@@ -1,7 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule, OnInit, inject } from '@angular/core';
-import { Users, UsersService } from './users.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Users, UsersService } from '../users.service';
+import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -20,12 +21,23 @@ export class UsersComponent implements OnInit {
   userId!: number;
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.userId = Number(this.route.snapshot.params['userId']);
   }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (localStorage.getItem("loginUsername") !== null
+          && localStorage.getItem("loginIsEnabled") !== null) {
+        this.router.navigate(['users']);
+      } else {
+        this.router.navigate(['login']);
+        return;
+      }
+    }
     this.title = "ユーザー一覧";
     this.getUsers();
   }
