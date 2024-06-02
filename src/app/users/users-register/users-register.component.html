@@ -10,13 +10,13 @@
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label">年齢：</label>
       <div class="col-sm-10">
-        <input class="form-control" style="width: 5%;" type="number" formControlName="age">
+        <input class="form-control" style="width: 10%;" type="text" formControlName="age">
       </div>
     </div>
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label">メールアドレス：</label>
       <div class="col-sm-10">
-        <input class="form-control" style="width: 25%;" type="email" formControlName="email">
+        <input class="form-control" style="width: 35%;" type="email" formControlName="email">
       </div>
     </div>
     <div class="row mb-3">
@@ -28,7 +28,12 @@
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label">権限：</label>
       <div class="col-sm-10">
-        <input class="form-control" style="width: 5%;" type="text" formControlName="auth">
+        <select formControlName="auth">
+          <option value="">選択してください</option>
+          <option *ngFor="let auth of auths">
+            {{ auth }}
+          </option>
+        </select>
       </div>
     </div>
     <button class="btn btn-primary">登録</button>

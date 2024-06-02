@@ -3,6 +3,7 @@ import { RegisterUser, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {  FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { UsersUtils } from '../users.utils';
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ export class UsersRegisterComponent implements OnInit {
   email!: string;
   password!: string;
   auth!: string;
+  auths = UsersUtils.AUTHS;
 
   userForm = new FormGroup({
     username: new FormControl(''),
@@ -27,7 +29,7 @@ export class UsersRegisterComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
     auth: new FormControl('')
-  })
+  });
 
   constructor(
     private usersService: UsersService,

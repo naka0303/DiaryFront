@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EditUser, UsersService } from '../users.service';
 import { NgFor, NgIf } from '@angular/common';
+import { UsersUtils } from '../users.utils';
 
 @Component({
   selector: 'app-users-edit',
@@ -22,7 +23,8 @@ export class UsersEditComponent implements OnInit {
   email!: string;
   password!: string;
   auth!: string;
-
+  auths = UsersUtils.AUTHS;
+  
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UsersService,
@@ -52,11 +54,11 @@ export class UsersEditComponent implements OnInit {
   getUser(userId: number): void {
     this.usersService.getUser(userId)
       .subscribe(res => {
-          this.userId = res.userId;
-          this.username = res.username;
-          this.age = res.age;
-          this.email = res.email;
-          this.auth = res.auth;
+        this.userId = res.userId;
+        this.username = res.username;
+        this.age = res.age;
+        this.email = res.email;
+        this.auth = res.auth;
     });
   }
 
