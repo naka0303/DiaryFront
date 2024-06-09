@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, NgModule } from "@angular/core";
-import { log } from "console";
 import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})

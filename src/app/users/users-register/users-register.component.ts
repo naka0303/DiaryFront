@@ -32,10 +32,9 @@ export class UsersRegisterComponent implements OnInit {
   });
 
   constructor(
-    private usersService: UsersService,
-  ) {
-    this.userForm;
-   }
+    private usersService: UsersService) {
+      this.userForm;
+  }
 
   ngOnInit() {
     this.title = "ユーザー登録";

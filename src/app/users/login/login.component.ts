@@ -4,7 +4,6 @@ import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { log } from 'console';
 
 @Component({
   standalone: true,
@@ -65,6 +64,7 @@ export class LoginComponent implements OnInit {
         }
 
         const jsonParsed = JSON.parse(JSON.stringify(res));
+        localStorage.setItem("loginUserId", jsonParsed.userId);
         localStorage.setItem("loginUsername", jsonParsed.username);
         localStorage.setItem("loginIsEnabled", jsonParsed.isEnabled);
 

@@ -49,6 +49,7 @@ export class LogoutComponent implements OnInit {
    * ログアウト
    */
   logout() {
+    localStorage.removeItem("loginUserId");
     localStorage.removeItem("loginUsername");
     localStorage.removeItem("loginIsEnabled");
 

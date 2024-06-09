@@ -9,12 +9,14 @@ import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./users/login/login.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from "./users/logout/logout.component";
+import { DiariesRegisterComponent } from "./diaries/diaries-register/diaries-register.component";
 
 export const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'users-detail/:userId', component: UsersDetailComponent },
   { path: 'users-edit/:userId', component: UsersEditComponent },
   { path: 'users-register', component: UsersRegisterComponent },
+  { path: 'diaries-register', component: DiariesRegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent }
 ];
