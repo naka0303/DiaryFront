@@ -2,16 +2,16 @@ import { NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DiariesService, RegisterDiary } from '../diaries.service';
+import { DiaryContentService, RegisterDiary } from '../diary-content.service';
 
 @Component({
   selector: 'app-diary-register',
   standalone: true,
-  templateUrl: './diaries-register.component.html',
-  styleUrl: './diaries-register.component.css',
+  templateUrl: './diary-content-register.component.html',
+  styleUrl: './diary-content-register.component.css',
   imports: [NgFor, ReactiveFormsModule],
 })
-export class DiariesRegisterComponent implements OnInit {
+export class DiaryContentRegisterComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
   userId!: any;
@@ -24,7 +24,7 @@ export class DiariesRegisterComponent implements OnInit {
   });
 
   constructor(
-    private diariesService: DiariesService) {
+    private diaryContentService: DiaryContentService) {
       this.registerDiaryForm;
       this.userId = Number(this.route.snapshot.params['userId']);
   }
@@ -42,7 +42,7 @@ export class DiariesRegisterComponent implements OnInit {
     registerDiary.diaryTitle = diaryTitle;
     registerDiary.diaryContent = diaryContent;
 
-    this.diariesService.registerDiary(registerDiary)
+    this.diaryContentService.registerDiaryContent(registerDiary)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

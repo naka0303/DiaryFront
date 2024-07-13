@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_I
 import { Users, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { combineLatest } from 'rxjs';
 
 
 @Component({

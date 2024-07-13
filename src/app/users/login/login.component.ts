@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loginUserId", jsonParsed.userId);
         localStorage.setItem("loginUsername", jsonParsed.username);
         localStorage.setItem("loginIsEnabled", jsonParsed.isEnabled);
+        localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
 
         this.router.navigate(['']);
       return true;

@@ -9,14 +9,18 @@ import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./users/login/login.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from "./users/logout/logout.component";
-import { DiariesRegisterComponent } from "./diaries/diaries-register/diaries-register.component";
+import { DiaryContentRegisterComponent } from "./diary-content/diary-content-register/diary-content-register.component";
+import { DiaryContentListComponent } from "./diary-content/diary-content-list/diary-content-list.component";
+import { DiaryContentDetailComponent } from "./diary-content/diary-content-detail/diary-content-detail.component";
 
 export const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'users-detail/:userId', component: UsersDetailComponent },
   { path: 'users-edit/:userId', component: UsersEditComponent },
   { path: 'users-register', component: UsersRegisterComponent },
-  { path: 'diaries-register', component: DiariesRegisterComponent },
+  { path: 'diary-content-list', component: DiaryContentListComponent },
+  { path: 'diary-content-detail/:contentId', component: DiaryContentDetailComponent },
+  { path: 'diary-content-register', component: DiaryContentRegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent }
 ];
