@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_I
 import { Users, UsersService } from '../users.service';
 import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { LoginUtil } from '../../utils/login-util';
 
 
 @Component({
@@ -28,15 +29,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem("loginUsername") !== null
-          && localStorage.getItem("loginIsEnabled") !== null) {
-        this.router.navigate(['users']);
-      } else {
-        this.router.navigate(['login']);
-        return;
-      }
-    }
+    LoginUtil.checkLogin(this.platformId, this.router, '/users');
     this.title = "ユーザー一覧";
     this.getUsers();
   }

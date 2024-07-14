@@ -1,7 +1,8 @@
 import { Router, RouterOutlet } from '@angular/router';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID } from '@angular/core';
-import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { LoginUtil } from './utils/login-util';
 
 @Component({
   standalone: true,
@@ -13,22 +14,16 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class AppComponent {
   title = 'DiaryFront';
+  loginIsEnabled: any;
 
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
-  ngOnInit(): void { 
-    this.title = "日記アプリ";
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.clear();
-      if (localStorage.getItem("loginUsername") !== null
-          && localStorage.getItem("loginIsEnabled") !== null) {
-        this.router.navigate(['']);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    }
+  ngOnInit(): void {
+    // ログイン判定
+    LoginUtil.checkLogin(this.platformId, this.router, '');
+    this.loginIsEnabled = localStorage.getItem("loginIsEnabled");
   }
 }

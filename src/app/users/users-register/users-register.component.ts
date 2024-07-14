@@ -1,9 +1,10 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { RegisterUser, UsersService } from '../users.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import {  FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UsersUtils } from '../users.utils';
+import { LoginUtil } from '../../utils/login-util';
 
 @Component({
   standalone: true,
@@ -32,11 +33,15 @@ export class UsersRegisterComponent implements OnInit {
   });
 
   constructor(
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private router: Router,
+
+    @Inject(PLATFORM_ID) private platformId: object) {
       this.userForm;
   }
 
   ngOnInit() {
+    LoginUtil.checkLogin(this.platformId, this.router, '/users-register');
     this.title = "ユーザー登録";
   }
 

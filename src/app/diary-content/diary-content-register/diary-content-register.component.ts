@@ -1,8 +1,9 @@
 import { NgFor } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DiaryContentService, RegisterDiary } from '../diary-content.service';
+import { LoginUtil } from '../../utils/login-util';
 
 @Component({
   selector: 'app-diary-register',
@@ -24,12 +25,15 @@ export class DiaryContentRegisterComponent implements OnInit {
   });
 
   constructor(
-    private diaryContentService: DiaryContentService) {
+    private diaryContentService: DiaryContentService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object) {
       this.registerDiaryForm;
       this.userId = Number(this.route.snapshot.params['userId']);
   }
   
   ngOnInit(): void {
+    LoginUtil.checkLogin(this.platformId, this.router, '/diary-content-register');
     this.title = "日記登録";
   }
 

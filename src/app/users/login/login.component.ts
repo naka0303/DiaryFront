@@ -1,9 +1,10 @@
-import { Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { DetailUser, LoginUser, UsersService } from '../users.service';
-import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { LoginUser, UsersService } from '../users.service';
+import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginUtil } from '../../utils/login-util';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   email!: string;
   auth!: string;
   diaryId!: number;
+  loginIsEnabled: any;
 
   userForm = new FormGroup({
     username: new FormControl(''),
@@ -37,16 +39,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem("loginUsername") !== null
-          && localStorage.getItem("loginIsEnabled") !== null) {
-        this.router.navigate(['']);
-      }
-    }
+    // ログイン判定
+    LoginUtil.checkLogin(this.platformId, this.router, '');
   }
 
   /**
-   * ログイン
+   * ログインを実行します.
    * @param userId ユーザーID
    */
   login(form: any) {
@@ -66,7 +64,7 @@ export class LoginComponent implements OnInit {
         const jsonParsed = JSON.parse(JSON.stringify(res));
         localStorage.setItem("loginUserId", jsonParsed.userId);
         localStorage.setItem("loginUsername", jsonParsed.username);
-        localStorage.setItem("loginIsEnabled", jsonParsed.isEnabled);
+        localStorage.setItem("loginIsEnabled", jsonParsed.enabled);
         localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
 
         this.router.navigate(['']);

@@ -1,3 +1,19 @@
 a {
   text-decoration: none;
 }
+
+.parent {
+  height: 150px;
+}
+
+.content img {
+  width: 100px;
+  height: 100px;
+}
+
+.content label {
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}

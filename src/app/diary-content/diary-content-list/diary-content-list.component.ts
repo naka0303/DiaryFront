@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '
 import { DiaryContentService, DiaryContent, SearchDiaryRequest } from '../diary-content.service';
 import { UsersService } from '../../users/users.service';
 import { HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { LoginUtil } from '../../utils/login-util';
 @Component({
   selector: 'app-diary-content-list',
   standalone: true,
@@ -29,21 +30,12 @@ export class DiaryContentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem("loginUsername") !== null
-          && localStorage.getItem("loginIsEnabled") !== null) {
-        this.router.navigate(['diary-content-list']);
-      } else {
-        this.router.navigate(['login']);
-        return;
-      }
-    }
+    LoginUtil.checkLogin(this.platformId, this.router, '/diary-content-list');
 
     this.title = "日記一覧表示画面";
     const userId = localStorage.getItem("loginUserId");
 
     this.getUser(Number(userId));
-
     setTimeout(() => {
       this.getDiaryContentsByDiaryId();
     }, 1000);
