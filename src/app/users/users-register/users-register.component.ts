@@ -35,13 +35,11 @@ export class UsersRegisterComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private router: Router,
-
     @Inject(PLATFORM_ID) private platformId: object) {
       this.userForm;
   }
 
   ngOnInit() {
-    LoginUtil.checkLogin(this.platformId, this.router, '/users-register');
     this.title = "ユーザー登録";
   }
 

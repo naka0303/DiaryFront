@@ -54,5 +54,7 @@ export class LogoutComponent implements OnInit {
     localStorage.removeItem("loginIsEnabled");
 
     this.router.navigate(['login']);
+
+    window.location.reload();
   }
 }

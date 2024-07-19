@@ -68,6 +68,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
 
         this.router.navigate(['']);
+
+        window.location.reload();
       return true;
     });
   }

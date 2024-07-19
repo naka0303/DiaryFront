@@ -25,20 +25,21 @@ export class DiaryContentListComponent implements OnInit {
     private diaryContentService: DiaryContentService,
     private usersService: UsersService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
+    @Inject(PLATFORM_ID) private platformId: object) {
   }
 
   ngOnInit(): void {
     LoginUtil.checkLogin(this.platformId, this.router, '/diary-content-list');
 
     this.title = "日記一覧表示画面";
-    const userId = localStorage.getItem("loginUserId");
 
-    this.getUser(Number(userId));
-    setTimeout(() => {
-      this.getDiaryContentsByDiaryId();
-    }, 1000);
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem("loginUserId");
+      this.getUser(Number(userId));
+      setTimeout(() => {
+        this.getDiaryContentsByDiaryId();
+      }, 1000);
+    }
   }
 
   /**

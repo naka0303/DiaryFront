@@ -7,7 +7,6 @@ export const LoginUtil = {
    * @param router 
    */
   checkLogin: (platformId: any, router: any, routePath: string) => {
-    console.log(localStorage.getItem("loginIsEnabled"));
     if (isPlatformBrowser(platformId)) {
       if (localStorage.getItem("loginIsEnabled") === "true") {
         router.navigate([routePath]);

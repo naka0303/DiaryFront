@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, PLATFORM_ID } from '@angular
 import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoginUtil } from './utils/login-util';
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   standalone: true,
@@ -15,6 +16,7 @@ import { LoginUtil } from './utils/login-util';
 export class AppComponent {
   title = 'DiaryFront';
   loginIsEnabled: any;
+  loginUsername: any;
 
   constructor(
     private router: Router,
@@ -24,6 +26,9 @@ export class AppComponent {
   ngOnInit(): void {
     // ログイン判定
     LoginUtil.checkLogin(this.platformId, this.router, '');
-    this.loginIsEnabled = localStorage.getItem("loginIsEnabled");
+    if (isPlatformBrowser(this.platformId)) {
+      this.loginIsEnabled = localStorage.getItem("loginIsEnabled");
+      this.loginUsername = localStorage.getItem("loginUsername");
+    }
   }
 }
