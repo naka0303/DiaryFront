@@ -29,7 +29,7 @@
   </div>
 </nav>
 
-<div class="parent" style="display: flex; justify-content: space-around; position: relative;">
+<div class="parent" style="display: flex; justify-content: space-around; position: relative;" *ngIf="loginIsEnabled === 'true'">
   <div class="content">
     <img src="assets/register-diary.png" alt="日記登録画像" [routerLink]="['/diary-content-register']"/><br>
     <label>日記登録</label>

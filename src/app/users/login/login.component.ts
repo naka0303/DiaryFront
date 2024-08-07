@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { LoginUser, UsersService } from '../users.service';
-import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginUtil } from '../../utils/login-util';
+import { MessageUtil } from '../../utils/message-util';
 
 @Component({
   standalone: true,
@@ -15,62 +16,82 @@ import { LoginUtil } from '../../utils/login-util';
 })
 export class LoginComponent implements OnInit {
 
+  public userForm!: FormGroup;
   route: ActivatedRoute = inject(ActivatedRoute);
   loginUser!: any;
   userId!: number;
-  username!: string;
-  age!: number;
-  email!: string;
-  auth!: string;
-  diaryId!: number;
   loginIsEnabled: any;
+  response!: any;
 
-  userForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
-  })
+  // ログインボタン押下判定用フラグ
+  submitted = false;
+
+  // フォーム
+  username!: FormControl;
+  password!: FormControl;
+
+  // エラーメッセージ
+  errorMessage!: any;
 
   constructor(
     private usersService: UsersService,
     private router: Router,
+    private builder: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-    this.userForm;
+    this.createForm();
+  }
+
+  createForm() {
+    this.userForm = this.builder.group({
+      username: ['', [Validators.required]],
+      password: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
+    this.submitted = false;
+
     // ログイン判定
     LoginUtil.checkLogin(this.platformId, this.router, '');
   }
 
   /**
-   * ログインを実行します.
+   * ログインします.
    * @param userId ユーザーID
    */
   login(form: any) {
     let username = form.username;
     let password = form.password;
-
+    
     var loginUser: LoginUser = new LoginUser();
     loginUser.username = username;
     loginUser.password = password;
 
-    this.usersService.login(loginUser)
-      .subscribe(res => {
-        if (res == null) {
-          return false;
-        }
+    if (loginUser.username !== null && loginUser.password !== null) {
+      this.usersService.login(loginUser)
+        .subscribe(res => {
+          console.log(res);
+          this.username = this.userForm.get('username') as FormControl;
+          this.password = this.userForm.get('password') as FormControl;
+          if (res === null) {
+            this.submitted = true;
+            this.errorMessage = MessageUtil.makeErrorMessage("login");
 
-        const jsonParsed = JSON.parse(JSON.stringify(res));
-        localStorage.setItem("loginUserId", jsonParsed.userId);
-        localStorage.setItem("loginUsername", jsonParsed.username);
-        localStorage.setItem("loginIsEnabled", jsonParsed.enabled);
-        localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
+            return false;
+          }
 
-        this.router.navigate(['']);
+          const jsonParsed = JSON.parse(JSON.stringify(res));
+          localStorage.setItem("loginUserId", jsonParsed.userId);
+          localStorage.setItem("loginUsername", jsonParsed.username);
+          localStorage.setItem("loginIsEnabled", jsonParsed.enabled);
+          localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
 
-        window.location.reload();
-      return true;
-    });
+          this.router.navigate(['']);
+
+          window.location.reload();
+        return true;
+      });
+    }
   }
 }

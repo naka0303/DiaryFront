@@ -4,11 +4,17 @@
       <div class="mb-3">
         <label for="formControlInput" class="form-label">ユーザー名：</label>
         <input type="text" class="form-control" formControlName="username">
+        <div style="color: red;" *ngIf="submitted && userForm.controls['username'].errors">ユーザー名が入力されていません。</div>
       </div>
       <div class="mb-3">
         <label for="inputPassword5" class="form-label">パスワード：</label>
         <input type="password" class="form-control" aria-describedby="passwordHelpBlock" formControlName="password">
+        <div style="color: red;" *ngIf="submitted && userForm.controls['password'].errors">パスワードが入力されていません。</div>
       </div>
+      <p style="color: red;"
+          *ngIf="submitted && !userForm.controls['username'].errors && !userForm.controls['password'].errors">
+        {{ errorMessage }}
+      </p>
       <button class="btn btn-primary">ログイン</button>
     </div>
   </div>
