@@ -12,8 +12,6 @@ import { LogoutComponent } from "./users/logout/logout.component";
 import { DiaryContentRegisterComponent } from "./diary-content/diary-content-register/diary-content-register.component";
 import { DiaryContentListComponent } from "./diary-content/diary-content-list/diary-content-list.component";
 import { DiaryContentDetailComponent } from "./diary-content/diary-content-detail/diary-content-detail.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ToastrModule } from "ngx-toastr";
 
 export const routes: Routes = [
   { path: 'users', component: UsersComponent },
