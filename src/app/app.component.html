@@ -1,1 +1,51 @@
-<router-outlet />
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">日記アプリ 〜Your's Diary〜</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarBasic">
+      <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{loginUsername}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/logout']" href="#"
+             *ngIf="loginIsEnabled === 'true'">ログアウト</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/users-register']" href="#"
+             *ngIf="loginIsEnabled !== 'true'">新規登録</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="parent" style="display: flex; justify-content: space-around; position: relative;" *ngIf="loginIsEnabled === 'true'">
+  <div class="content">
+    <img src="assets/register-diary.png" alt="日記登録画像" [routerLink]="['/diary-content-register']"/><br>
+    <label>日記登録</label>
+  </div>
+  <div class="content">
+    <img src="assets/display-diary.png" alt="日記一覧表示画像" [routerLink]="['/diary-content-list']"/><br>
+    <label>日記一覧</label>
+  </div>
+  <div class="content">
+    <img src="assets/display-users.png" alt="ユーザー一覧表示画像" [routerLink]="['/users']"/><br>
+    <label>ユーザー一覧</label>
+  </div>
+  <div class="content">
+    <img src="assets/intercourse.png" alt="日記交流所画像" [routerLink]="['/users']"/><br>
+    <label>日記交流所</label>
+  </div>
+</div>
+<hr>
+<router-outlet></router-outlet>
