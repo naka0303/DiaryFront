@@ -1,43 +1,45 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { DiaryContentService, DiaryContent, SearchDiaryRequest } from '../diary-content.service';
-import { UsersService } from '../../users/users.service';
-import { HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { DiaryService } from '../diary.service';
+import { UsersService } from '../../user/user.service';
+
 import { LoginUtil } from '../../utils/login-util';
+import { Diary } from '../diary';
 @Component({
   selector: 'app-diary-content-list',
   standalone: true,
   imports: [NgFor, NgIf, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './diary-content-list.component.html',
-  styleUrl: './diary-content-list.component.css'
+  templateUrl: './diary-list.component.html',
+  styleUrl: './diary-list.component.css'
 })
-export class DiaryContentListComponent implements OnInit {
+export class DiaryListComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
   registeredContents!: any;
-  registeredDiaryContents!: any;
-  diaryId!: number;
+  registeredDiary!: any;
+  userId!: any;
+  diaryId!: any;
 
   constructor(
-    private diaryContentService: DiaryContentService,
+    private diaryService: DiaryService,
     private usersService: UsersService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
   }
 
   ngOnInit(): void {
-    LoginUtil.checkLogin(this.platformId, this.router, '/diary-content-list');
+    LoginUtil.checkLogin(this.platformId, this.router, '/diary-list');
 
     this.title = "日記一覧表示画面";
 
     if (isPlatformBrowser(this.platformId)) {
-      const userId = localStorage.getItem("loginUserId");
-      this.getUser(Number(userId));
+      this.userId = Number(localStorage.getItem("loginUserId"));
+      this.getUser(this.userId);
       setTimeout(() => {
-        this.getDiaryContentsByDiaryId();
+        this.getDiaries();
       }, 1000);
     }
   }
@@ -54,16 +56,12 @@ export class DiaryContentListComponent implements OnInit {
   }
 
   /**
-   * 指定された日記IDに紐づく日記記事
+   * 指定されたユーザーに紐づく日記情報取得.
    */
-  getDiaryContentsByDiaryId(): void {
-
-    const paramsOptions = <HttpParamsOptions>{fromObject: {'diaryId': 9}};
-    const params = new HttpParams(paramsOptions);
-
-    this.diaryContentService.getDiaryContentsByDiaryId(params)
-      .subscribe((res: DiaryContent) => {
-        this.registeredDiaryContents = res;
+  getDiaries(): void {
+    this.diaryService.getDiaries(this.userId)
+      .subscribe((res: Diary) => {
+        this.registeredDiary = res;
       });
   }
 }

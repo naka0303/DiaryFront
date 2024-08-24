@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { LoginUser, UsersService } from '../users.service';
+import { LoginUser, UsersService } from '../user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';

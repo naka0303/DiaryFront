@@ -1,16 +1,16 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { DetailUser, UsersService } from '../users.service';
+import { DetailUser, UsersService } from '../user.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './users-detail.component.html',
-  styleUrl: './users-detail.component.css',
+  templateUrl: './user-detail.component.html',
+  styleUrl: './user-detail.component.css',
   imports: [NgFor, NgIf, RouterLink],
 })
-export class UsersDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;

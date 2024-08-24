@@ -2,17 +2,18 @@ import { NgFor } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DiaryContentService, RegisterDiary } from '../diary-content.service';
+import { DiaryService } from '../diary.service';
 import { LoginUtil } from '../../utils/login-util';
+import { RegisterDiary } from '../diary';
 
 @Component({
   selector: 'app-diary-register',
   standalone: true,
-  templateUrl: './diary-content-register.component.html',
-  styleUrl: './diary-content-register.component.css',
+  templateUrl: './diary-register.component.html',
+  styleUrl: './diary-register.component.css',
   imports: [NgFor, ReactiveFormsModule],
 })
-export class DiaryContentRegisterComponent implements OnInit {
+export class DiaryRegisterComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
   userId!: any;
@@ -25,15 +26,15 @@ export class DiaryContentRegisterComponent implements OnInit {
   });
 
   constructor(
-    private diaryContentService: DiaryContentService,
+    private diaryService: DiaryService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
       this.registerDiaryForm;
-      this.userId = Number(this.route.snapshot.params['userId']);
+      this.userId = this.route.snapshot.params['userId'];
   }
   
   ngOnInit(): void {
-    LoginUtil.checkLogin(this.platformId, this.router, '/diary-content-register');
+    LoginUtil.checkLogin(this.platformId, this.router, '/diary-register');
     this.title = "日記登録";
   }
 
@@ -42,11 +43,10 @@ export class DiaryContentRegisterComponent implements OnInit {
     let diaryContent = form.diaryContent;
 
     var registerDiary: RegisterDiary = new RegisterDiary();
-    registerDiary.userId = Number(localStorage.getItem("loginUserId"));
     registerDiary.diaryTitle = diaryTitle;
     registerDiary.diaryContent = diaryContent;
 
-    this.diaryContentService.registerDiaryContent(registerDiary)
+    this.diaryService.registerDiary(this.userId, registerDiary)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

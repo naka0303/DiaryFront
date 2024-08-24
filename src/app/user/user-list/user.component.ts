@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { Users, UsersService } from '../users.service';
+import { Users, UsersService } from '../user.service';
 import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { LoginUtil } from '../../utils/login-util';
@@ -8,12 +8,12 @@ import { LoginUtil } from '../../utils/login-util';
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.css',
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.css',
   imports: [NgFor, NgIf, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class UsersComponent implements OnInit {
+export class UserComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;

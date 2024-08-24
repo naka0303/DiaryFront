@@ -8,9 +8,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let content of registeredDiaryContents">
-      <th scope="row"><a [routerLink]="['/diary-content-detail', content.contentId]">{{ content.contentId }}</a></th>
-      <td>{{ content.diaryTitle }}</td>
+    <tr *ngFor="let diary of registeredDiary">
+      <th scope="row"><a [routerLink]="['/diary-detail', diary.diaryId]">{{ diary.diaryId }}</a></th>
+      <td>{{ diary.diaryTitle }}</td>
       <td><button type="button">削除</button></td>
       <td><button type="button">編集</button></td>
     </tr>

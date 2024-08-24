@@ -1,19 +1,19 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { RegisterUser, UsersService } from '../users.service';
+import { RegisterUser, UsersService } from '../user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { UsersUtils } from '../users.utils';
+import { UsersUtils } from '../user.utils';
 import { LoginUtil } from '../../utils/login-util';
 
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './users-register.component.html',
-  styleUrl: './users-register.component.css',
+  templateUrl: './user-register.component.html',
+  styleUrl: './user-register.component.css',
   imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],
 })
-export class UsersRegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;

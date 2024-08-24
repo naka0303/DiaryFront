@@ -1,5 +1,5 @@
 import { Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { DetailUser, LoginUser, UsersService } from '../users.service';
+import { DetailUser, LoginUser, UsersService } from '../user.service';
 import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
