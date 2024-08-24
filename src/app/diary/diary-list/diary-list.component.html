@@ -3,14 +3,16 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">記事ID</th>
+      <th scope="col">日記ID</th>
       <th scope="col">タイトル</th>
+      <th scope="col">投稿日時</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let diary of registeredDiary">
       <th scope="row"><a [routerLink]="['/diary-detail', diary.diaryId]">{{ diary.diaryId }}</a></th>
       <td>{{ diary.diaryTitle }}</td>
+      <td>{{ diary.createdAt }}</td>
       <td><button type="button">削除</button></td>
       <td><button type="button">編集</button></td>
     </tr>

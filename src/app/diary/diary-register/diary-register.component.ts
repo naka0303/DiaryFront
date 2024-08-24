@@ -30,7 +30,7 @@ export class DiaryRegisterComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
       this.registerDiaryForm;
-      this.userId = this.route.snapshot.params['userId'];
+      this.userId = Number(localStorage.getItem("loginUserId"));
   }
   
   ngOnInit(): void {
