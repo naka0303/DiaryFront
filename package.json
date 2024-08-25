@@ -23,6 +23,7 @@
     "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/ssr": "^17.2.0",
+    "@developer-partners/ngx-modal-dialog": "^1.0.5",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "bootstrap": "^5.3.2",
     "express": "^4.18.2",

@@ -1,7 +1,7 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { DetailUser, UsersService } from '../user.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { UserService } from '../user.service';
+import { NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -23,7 +23,7 @@ export class UserDetailComponent implements OnInit {
   diaryId!: number;
 
   constructor(
-    private usersService: UsersService
+    private userService: UserService
   ) {
     this.userId = Number(this.route.snapshot.params['userId']);
   }
@@ -38,7 +38,7 @@ export class UserDetailComponent implements OnInit {
    * @param userId ユーザーID
    */
   getUser(userId: number): void {
-    this.usersService.getUser(userId)
+    this.userService.getUser(userId)
       .subscribe(res => {
         this.userId = res.userId;
         this.username = res.username;

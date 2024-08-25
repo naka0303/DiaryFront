@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { Users, UsersService } from '../user.service';
+import { User, UserService } from '../user.service';
 import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { LoginUtil } from '../../utils/login-util';
@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
   userId!: number;
 
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
@@ -35,14 +35,14 @@ export class UserComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.usersService.getUsers()
+    this.userService.getUsers()
       .subscribe(res => {
         this.registeredUsers = res;
       });
   }
 
   onDeleteUser(userId: number) {
-    this.usersService.deleteUser(userId)
+    this.userService.deleteUser(userId)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

@@ -8,9 +8,7 @@ describe('DiaryRegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        DiaryRegisterComponent
-      ]
+      imports: [DiaryRegisterComponent]
     })
     .compileComponents();
     

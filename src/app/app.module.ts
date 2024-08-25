@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Inject, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { UserComponent } from "./user/user-list/user.component";
@@ -7,11 +7,12 @@ import { UserRegisterComponent } from "./user/user-register/user-register.compon
 import { UserEditComponent } from "./user/user-edit/user-edit.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./user/login/login.component";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from "./user/logout/logout.component";
 import { DiaryRegisterComponent } from "./diary/diary-register/diary-register.component";
 import { DiaryListComponent } from "./diary/diary-list/diary-list.component";
 import { DiaryDetailComponent } from "./diary/diary-detail/diary-detail.component";
+import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 export const routes: Routes = [
   { path: 'user', component: UserComponent },
@@ -29,11 +30,12 @@ export const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    NgbModule,
-    // BrowserAnimationsModule,
-    // ToastrModule.forRoot({
-    //  positionClass: 'toast-top-center'
-    //})
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false
+    })
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -42,7 +44,9 @@ export const routes: Routes = [
     HeaderComponent
   ],
 
-  providers: [],
-  // bootstrap: [AppComponent]
+  providers: [
+    
+  ],
 })
-export class AppModule { }
+export class AppModule {}
+

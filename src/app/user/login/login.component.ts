@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { LoginUser, UsersService } from '../user.service';
+import { LoginUser, UserService } from '../user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   errorMessage!: any;
 
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private router: Router,
     private builder: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: object
@@ -69,9 +69,8 @@ export class LoginComponent implements OnInit {
     loginUser.password = password;
 
     if (loginUser.username !== null && loginUser.password !== null) {
-      this.usersService.login(loginUser)
+      this.userService.login(loginUser)
         .subscribe(res => {
-          console.log(res);
           this.username = this.userForm.get('username') as FormControl;
           this.password = this.userForm.get('password') as FormControl;
           if (res === null) {

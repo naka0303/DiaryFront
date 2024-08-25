@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { EditUser, UsersService } from '../user.service';
+import { UserService } from '../user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { UsersUtils } from '../user.utils';
 
@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private usersService: UsersService,
+    private userService: UserService,
   ) {
     this.userId = Number(this.route.snapshot.params['userId']);
   }
@@ -52,7 +52,7 @@ export class UserEditComponent implements OnInit {
    * @param userId ユーザーID
    */
   getUser(userId: number): void {
-    this.usersService.getUser(userId)
+    this.userService.getUser(userId)
       .subscribe(res => {
         this.userId = res.userId;
         this.username = res.username;
@@ -67,7 +67,7 @@ export class UserEditComponent implements OnInit {
    * @param form 入力値
    */
   onEditUser() {
-    this.usersService.editUser(this.userForm.value, this.userId)
+    this.userService.editUser(this.userForm.value, this.userId)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

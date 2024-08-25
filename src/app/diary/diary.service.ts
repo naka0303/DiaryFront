@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable, NgModule } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { Diary } from "./diary";
 
@@ -9,8 +9,7 @@ export class DiaryService {
   private ROOT_DIARY_URL = 'http://localhost:8081/v1/users';
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient) { }
 
   /**
    * 指定されたユーザーに紐づく日記情報取得

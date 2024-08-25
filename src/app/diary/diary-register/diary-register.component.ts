@@ -1,7 +1,7 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DiaryService } from '../diary.service';
 import { LoginUtil } from '../../utils/login-util';
 import { RegisterDiary } from '../diary';
@@ -11,7 +11,7 @@ import { RegisterDiary } from '../diary';
   standalone: true,
   templateUrl: './diary-register.component.html',
   styleUrl: './diary-register.component.css',
-  imports: [NgFor, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink]
 })
 export class DiaryRegisterComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -19,6 +19,7 @@ export class DiaryRegisterComponent implements OnInit {
   userId!: any;
   diaryTitle!: string;
   diaryContent!: string;
+  successFlg!: boolean;
 
   registerDiaryForm = new FormGroup({
     diaryTitle: new FormControl(''),
@@ -34,6 +35,7 @@ export class DiaryRegisterComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.successFlg = false;
     LoginUtil.checkLogin(this.platformId, this.router, '/diary-register');
     this.title = "日記登録";
   }
@@ -50,7 +52,13 @@ export class DiaryRegisterComponent implements OnInit {
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {
-          this.ngOnInit();
+          this.successFlg = true;
+
+          setTimeout(() => {
+            if (this.successFlg) {
+              this.router.navigate(['diary-list']);
+            }
+          }, 2000);
         }
       });
   }

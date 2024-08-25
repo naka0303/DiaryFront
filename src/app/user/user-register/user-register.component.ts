@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { RegisterUser, UsersService } from '../user.service';
+import { RegisterUser, UserService } from '../user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -33,7 +33,7 @@ export class UserRegisterComponent implements OnInit {
   });
 
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
       this.userForm;
@@ -57,7 +57,7 @@ export class UserRegisterComponent implements OnInit {
     registerUser.password = password;
     registerUser.auth = auth;
 
-    this.usersService.registerUser(registerUser)
+    this.userService.registerUser(registerUser)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})
-export class UsersService {
+export class UserService {
 
   private ROOT_USERS_URL = 'http://localhost:8081/v1/users';
   private ROOT_LOGIN_URL = 'http://localhost:8081/v1/login';
@@ -17,8 +17,8 @@ export class UsersService {
    * 全ユーザー情報取得
    * @returns 
    */
-  getUsers(): Observable<Users> {
-    return this.http.get<Users>(this.ROOT_USERS_URL);
+  getUsers(): Observable<User> {
+    return this.http.get<User>(this.ROOT_USERS_URL);
   }
 
   /**
@@ -67,7 +67,7 @@ export class UsersService {
   }
 }
 
-export class Users {
+export class User {
   userId!: number;
   username!: string;
   age!: number;

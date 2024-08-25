@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_I
 import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { DiaryService } from '../diary.service';
-import { UsersService } from '../../user/user.service';
+import { UserService } from '../../user/user.service';
 
 import { LoginUtil } from '../../utils/login-util';
 import { Diary } from '../diary';
@@ -25,7 +25,7 @@ export class DiaryListComponent implements OnInit {
 
   constructor(
     private diaryService: DiaryService,
-    private usersService: UsersService,
+    private userService: UserService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object) {
   }
@@ -49,7 +49,7 @@ export class DiaryListComponent implements OnInit {
    * @param userId ユーザーID
    */
   getUser(userId: number): void {
-    this.usersService.getUser(userId)
+    this.userService.getUser(userId)
       .subscribe(res => {
         this.diaryId = res.diaryId;
     });
