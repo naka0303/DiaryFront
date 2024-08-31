@@ -22,6 +22,7 @@ export class DiaryListComponent implements OnInit {
   registeredDiary!: any;
   userId!: any;
   diaryId!: any;
+  successFlg!: boolean;
 
   constructor(
     private diaryService: DiaryService,
@@ -62,6 +63,24 @@ export class DiaryListComponent implements OnInit {
     this.diaryService.getDiaries(this.userId)
       .subscribe((res: Diary) => {
         this.registeredDiary = res;
+      });
+  }
+
+  /**
+   * 日記削除
+   * @param diaryId 
+   */
+  onDeleteDiary(diaryId: number): void {
+    this.diaryService.deleteDiary(this.userId, diaryId)
+      .subscribe(res => {
+        // TODO: ステータスコードの直書きはやめる
+        if (res === "OK") {
+          this.successFlg = true;
+
+          if (this.successFlg) {
+            this.getDiaries();
+          }
+        }
       });
   }
 }

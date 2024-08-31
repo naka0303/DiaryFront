@@ -13,7 +13,7 @@
       <th scope="row"><a [routerLink]="['/diary-detail', diary.diaryId]">{{ diary.diaryId }}</a></th>
       <td>{{ diary.diaryTitle }}</td>
       <td>{{ diary.createdAt }}</td>
-      <td><button type="button">削除</button></td>
+      <td><button type="button" (click)="onDeleteDiary(diary.diaryId)">削除</button></td>
       <td><button type="button">編集</button></td>
     </tr>
   </tbody>

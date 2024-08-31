@@ -39,4 +39,13 @@ export class DiaryService {
   registerDiary(userId: number, registerDiary: any) {
     return this.http.post(`${this.ROOT_DIARY_URL}/${userId}/diaries`, registerDiary);
   }
+
+  /**
+   * 日記削除
+   * @param userId ユーザーID
+   * @param diaryId 日記ID
+   */
+  deleteDiary(userId: number, diaryId: number) {
+    return this.http.delete(`${this.ROOT_DIARY_URL}/${userId}/diaries/${diaryId}`);
+  }
 }
