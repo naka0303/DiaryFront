@@ -12,3 +12,9 @@ export class RegisterDiary {
   diaryTitle!: string;
   diaryContent!: string;
 }
+
+export class EditDiary {
+  userId!: number;
+  diaryTitle!: string;
+  diaryContent!: string;
+}

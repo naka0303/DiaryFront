@@ -34,10 +34,19 @@ export class DiaryService {
    * 
    * @param userId ユーザーID
    * @param registerDiary 日記情報
-   * @returns 
    */
   registerDiary(userId: number, registerDiary: any) {
     return this.http.post(`${this.ROOT_DIARY_URL}/${userId}/diaries`, registerDiary);
+  }
+
+  /**
+   * 日記編集
+   * @param userId ユーザーID 
+   * @param diaryId 日記ID
+   * @param editDiary 日記情報
+   */
+  editDiary(userId: number, diaryId: number, editDiary: any) {
+    return this.http.put(`${this.ROOT_DIARY_URL}/${userId}/diaries/${diaryId}`, editDiary);
   }
 
   /**

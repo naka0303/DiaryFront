@@ -1,19 +1,22 @@
 <h1 class="card-title">{{ title }}</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">日記ID</th>
-      <th scope="col">タイトル</th>
-      <th scope="col">内容</th>
-      <th scope="col">作成日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ diaryId }}</td>
-      <td>{{ diaryTitle }}</td>
-      <td>{{ diaryContent }}</td>
-      <td>{{ createdAt }}</td>
-    </tr>
-  </tbody>
-</table>
+<p class="alert alert-success" *ngIf="successFlg">
+  編集しました。
+</p>
+<form style="width: 100%;" [formGroup]="editDiaryForm" (ngSubmit)="onEditDiary(editDiaryForm.value)">
+  <div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">日記タイトル：</label>
+      <div class="col-sm-10">
+        <input class="form-control" style="width: 25%;" type="text" formControlName="diaryTitle" [(ngModel)]="diaryTitle" value="{{ diaryTitle}}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">内容：</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="15" formControlName="diaryContent" [(ngModel)]="diaryContent" value="{{ diaryContent }}"
+                  style="width: 50%;"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary">編集</button>
+  </div>
+</form>
