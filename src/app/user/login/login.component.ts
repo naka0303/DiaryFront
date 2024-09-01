@@ -81,14 +81,22 @@ export class LoginComponent implements OnInit {
           }
 
           const jsonParsed = JSON.parse(JSON.stringify(res));
-          localStorage.setItem("loginUserId", jsonParsed.userId);
-          localStorage.setItem("loginUsername", jsonParsed.username);
-          localStorage.setItem("loginIsEnabled", jsonParsed.enabled);
-          localStorage.setItem("loginDiaryId", jsonParsed.loginDiaryId);
+          setTimeout(() => {
 
-          this.router.navigate(['']);
+            // ユーザーIDでのユーザー情報取得
+            this.userService.getUser(jsonParsed.userId)
+            .subscribe(userInfo => {
+              localStorage.setItem("loginUserId", userInfo.userId.toString());
+              localStorage.setItem("loginUsername", userInfo.username.toString());
+              localStorage.setItem("loginAge", userInfo.age.toString());
+              localStorage.setItem("loginAuth", userInfo.auth.toString());
+              localStorage.setItem("loginIsEnabled", jsonParsed.enabled.toString());
 
-          window.location.reload();
+              this.router.navigate(['']);
+
+              window.location.reload();
+            });
+          }, 100);
         return true;
       });
     }

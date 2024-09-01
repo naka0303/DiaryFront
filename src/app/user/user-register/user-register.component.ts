@@ -4,7 +4,6 @@ import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UsersUtils } from '../user.utils';
-import { LoginUtil } from '../../utils/login-util';
 
 @Component({
   standalone: true,
@@ -23,6 +22,7 @@ export class UserRegisterComponent implements OnInit {
   password!: string;
   auth!: string;
   auths = UsersUtils.AUTHS;
+  successFlg!: boolean;
 
   userForm = new FormGroup({
     username: new FormControl(''),
@@ -43,6 +43,10 @@ export class UserRegisterComponent implements OnInit {
     this.title = "ユーザー登録";
   }
 
+  /**
+   * ユーザー登録
+   * @param form 
+   */
   onRegisterUser(form: any) {
     let username = form.username;
     let age = form.age;
@@ -61,7 +65,13 @@ export class UserRegisterComponent implements OnInit {
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {
-          this.ngOnInit();
+          this.successFlg = true;
+
+          setTimeout(() => {
+            if (this.successFlg) {
+              this.router.navigate(['user-list']);
+            }
+          }, 2000);
         }
       });
   }

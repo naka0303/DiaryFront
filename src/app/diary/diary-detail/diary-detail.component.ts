@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DiaryService } from '../diary.service';
-import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { EditDiary } from '../diary';
 import { NgIf } from '@angular/common';
 
@@ -59,11 +59,10 @@ export class DiaryDetailComponent implements OnInit {
   }
 
   /**
-   * 日記編集
+   * 日記編集.
    * @param form 
    */
   onEditDiary(form: any) :void {
-    console.log(this.f)
     let diaryTitle = form.diaryTitle;
     let diaryContent = form.diaryContent;
 

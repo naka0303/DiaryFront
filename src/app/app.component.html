@@ -14,7 +14,7 @@
              *ngIf="loginIsEnabled === 'true'">ログアウト</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="['/users-register']" href="#"
+          <a class="nav-link active" aria-current="page" [routerLink]="['/user-register']" href="#"
              *ngIf="loginIsEnabled !== 'true'">新規登録</a>
         </li>
         <li class="nav-item">
@@ -38,8 +38,12 @@
     <img src="assets/display-diary.png" alt="日記一覧表示画像" [routerLink]="['/diary-list']"/><br>
     <label>日記一覧</label>
   </div>
-  <div class="content">
-    <img src="assets/display-users.png" alt="ユーザー一覧表示画像" [routerLink]="['/user']"/><br>
+  <div class="content" *ngIf="loginAuth === 'ADMIN'">
+    <img src="assets/register-user.png" alt="ユーザー登録画像" [routerLink]="['/user-register']"/><br>
+    <label>ユーザー登録</label>
+  </div>
+  <div class="content" *ngIf="loginAuth === 'ADMIN'">
+    <img src="assets/display-users.png" alt="ユーザー一覧表示画像" [routerLink]="['/user-list']"/><br>
     <label>ユーザー一覧</label>
   </div>
   <div class="content">

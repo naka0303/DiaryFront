@@ -1,19 +1,19 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, NgModule, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { User, UserService } from '../user.service';
-import { CommonModule, NgFor, NgIf, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute, RouterLink, Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { UserService } from '../user.service';
+import { NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { LoginUtil } from '../../utils/login-util';
 
 
 @Component({
   standalone: true,
   selector: 'app-users',
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css',
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.css',
   imports: [NgFor, NgIf, RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class UserComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
@@ -41,6 +41,10 @@ export class UserComponent implements OnInit {
       });
   }
 
+  /**
+   * 指定ユーザー削除
+   * @param userId ユーザーID
+   */
   onDeleteUser(userId: number) {
     this.userService.deleteUser(userId)
       .subscribe(res => {

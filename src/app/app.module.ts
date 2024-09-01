@@ -1,23 +1,21 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Inject, NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
-import { UserComponent } from "./user/user-list/user.component";
+import { UserListComponent } from "./user/user-list/user-list.component";
 import { UserDetailComponent } from "./user/user-detail/user-detail.component";
 import { UserRegisterComponent } from "./user/user-register/user-register.component";
-import { UserEditComponent } from "./user/user-edit/user-edit.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./user/login/login.component";
 import { LogoutComponent } from "./user/logout/logout.component";
 import { DiaryRegisterComponent } from "./diary/diary-register/diary-register.component";
 import { DiaryListComponent } from "./diary/diary-list/diary-list.component";
 import { DiaryDetailComponent } from "./diary/diary-detail/diary-detail.component";
-import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 
 export const routes: Routes = [
-  { path: 'user', component: UserComponent },
+  { path: 'user-list', component: UserListComponent },
   { path: 'user-detail/:userId', component: UserDetailComponent },
-  { path: 'user-edit/:userId', component: UserEditComponent },
   { path: 'user-register', component: UserRegisterComponent },
   { path: 'diary-list', component: DiaryListComponent },
   { path: 'diary-detail/:diaryId', component: DiaryDetailComponent },

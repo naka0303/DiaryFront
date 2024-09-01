@@ -14,9 +14,11 @@ import { isPlatformBrowser } from "@angular/common";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'DiaryFront';
-  loginIsEnabled: any;
+  loginUserId: any;
   loginUsername: any;
+  loginAge: any;
+  loginAuth: any;
+  loginIsEnabled: any;
 
   constructor(
     private router: Router,
@@ -24,11 +26,15 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
+
     // ログイン判定
     LoginUtil.checkLogin(this.platformId, this.router, '');
     if (isPlatformBrowser(this.platformId)) {
-      this.loginIsEnabled = localStorage.getItem("loginIsEnabled");
+      this.loginUserId = localStorage.getItem("loginUserId");
       this.loginUsername = localStorage.getItem("loginUsername");
+      this.loginAge = localStorage.getItem("loginAge");
+      this.loginAuth = localStorage.getItem("loginAuth");
+      this.loginIsEnabled = localStorage.getItem("loginIsEnabled");
     }
   }
 }
