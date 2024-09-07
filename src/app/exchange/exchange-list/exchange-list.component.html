@@ -1,0 +1,17 @@
+<app-header></app-header>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">日記ID</th>
+      <th scope="col">タイトル</th>
+      <th scope="col">投稿日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let diary of registeredDiary">
+      <th scope="row"><a [routerLink]="['/exchange-detail', diary.diaryId]">{{ diary.diaryId }}</a></th>
+      <td>{{ diary.diaryTitle }}</td>
+      <td>{{ diary.createdAt }}</td>
+    </tr>
+  </tbody>
+</table>
