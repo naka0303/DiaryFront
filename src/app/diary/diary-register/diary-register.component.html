@@ -1,0 +1,22 @@
+<h1 class="card-title">{{ title }}</h1>
+<p class="alert alert-success" *ngIf="successFlg">
+  投稿しました。
+</p>
+<form style="width: 100%;" [formGroup]="registerDiaryForm" (ngSubmit)="onRegisterDiary(registerDiaryForm.value)">
+  <div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">日記タイトル：</label>
+      <div class="col-sm-10">
+        <input class="form-control" style="width: 25%;" type="text" formControlName="diaryTitle">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">内容：</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="15" formControlName="diaryContent"
+                  style="width: 50%;"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary">登録</button>
+  </div>
+</form>

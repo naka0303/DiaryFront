@@ -1,0 +1,18 @@
+<app-header></app-header>
+<h1 class="card-title">{{ title }}</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ユーザーID</th>
+      <th scope="col">ユーザー名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of registeredUsers">
+      <th scope="row"><a [routerLink]="['/user-detail', user.userId]">{{ user.userId }}</a></th>
+      <td>{{ user.username }}</td>
+      <td><button type="button" (click)="onDeleteUser(user.userId)">削除</button></td>
+      <td><button type="button" [routerLink]="['/user-edit', user.userId]">編集</button></td>
+    </tr>
+  </tbody>
+</table>

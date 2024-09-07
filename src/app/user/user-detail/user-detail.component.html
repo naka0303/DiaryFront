@@ -1,0 +1,27 @@
+<h1 class="card-title">{{ title }}</h1>
+<p class="alert alert-success" *ngIf="successFlg">
+  編集しました。
+</p>
+<form style="width: 100%;" [formGroup]="editUserForm" (ngSubmit)="onEditUser(editUserForm.value)">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ユーザーID</th>
+      <th scope="col">ユーザー名</th>
+      <th scope="col">年齢</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">権限</th>
+      <th scope="col">日記ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ userId }}</td>
+      <td>{{ username }}</td>
+      <td>{{ age }}</td>
+      <td>{{ email }}</td>
+      <td>{{ auth }}</td>
+      <td>{{ diaryId }}</td>
+    </tr>
+  </tbody>
+</table>
