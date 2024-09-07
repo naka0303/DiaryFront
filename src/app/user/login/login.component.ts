@@ -9,7 +9,7 @@ import { MessageUtil } from '../../utils/message-util';
 
 @Component({
   standalone: true,
-  selector: 'app-users',
+  selector: 'app-user',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink, NgbModule],

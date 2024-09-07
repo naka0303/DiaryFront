@@ -12,6 +12,7 @@ import { DiaryListComponent } from "./diary/diary-list/diary-list.component";
 import { DiaryDetailComponent } from "./diary/diary-detail/diary-detail.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
+import { ExchangeComponent } from "./exchange/exchange.component";
 
 export const routes: Routes = [
   { path: 'user-list', component: UserListComponent },
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'diary-list', component: DiaryListComponent },
   { path: 'diary-detail/:diaryId', component: DiaryDetailComponent },
   { path: 'diary-register', component: DiaryRegisterComponent },
+  { path: 'diary-exchange', component: ExchangeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent }
 ];

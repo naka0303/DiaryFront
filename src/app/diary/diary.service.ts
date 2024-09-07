@@ -6,18 +6,27 @@ import { Diary } from "./diary";
 @Injectable({providedIn: 'root'})
 export class DiaryService {
 
-  private ROOT_DIARY_URL = 'http://localhost:8081/v1/users';
+  private ROOT_USER_URL = 'http://localhost:8081/v1/users';
+  private ROOT_DIARY_URL = 'http://localhost:8081/v1/diaries';
 
   constructor(
     private http: HttpClient) { }
+  
+  /**
+   * 全ての日記情報取得
+   * @returns 
+   */
+  getDiaries(): Observable<Diary> {
+    return this.http.get<Diary>(`${this.ROOT_DIARY_URL}`);
+  }
 
   /**
    * 指定されたユーザーに紐づく日記情報取得
    * @param diaryId 日記ID 
    * @returns 
    */
-  getDiaries(userId: number): Observable<Diary> {
-    return this.http.get<Diary>(`${this.ROOT_DIARY_URL}/${userId}/diaries`);
+  getDiariesByUser(userId: number): Observable<Diary> {
+    return this.http.get<Diary>(`${this.ROOT_USER_URL}/${userId}/diaries`);
   }
 
   /**
@@ -26,7 +35,7 @@ export class DiaryService {
    * @param contentId 日記記事ID
    */
   getDiary(userId: number, diaryId: number) {
-    return this.http.get<Diary>(`${this.ROOT_DIARY_URL}/${userId}/diaries/${diaryId}`);
+    return this.http.get<Diary>(`${this.ROOT_USER_URL}/${userId}/diaries/${diaryId}`);
   }
 
   /**
@@ -36,7 +45,7 @@ export class DiaryService {
    * @param registerDiary 日記情報
    */
   registerDiary(userId: number, registerDiary: any) {
-    return this.http.post(`${this.ROOT_DIARY_URL}/${userId}/diaries`, registerDiary);
+    return this.http.post(`${this.ROOT_USER_URL}/${userId}/diaries`, registerDiary);
   }
 
   /**
@@ -46,7 +55,7 @@ export class DiaryService {
    * @param editDiary 日記情報
    */
   editDiary(userId: number, diaryId: number, editDiary: any) {
-    return this.http.put(`${this.ROOT_DIARY_URL}/${userId}/diaries/${diaryId}`, editDiary);
+    return this.http.put(`${this.ROOT_USER_URL}/${userId}/diaries/${diaryId}`, editDiary);
   }
 
   /**
@@ -55,6 +64,6 @@ export class DiaryService {
    * @param diaryId 日記ID
    */
   deleteDiary(userId: number, diaryId: number) {
-    return this.http.delete(`${this.ROOT_DIARY_URL}/${userId}/diaries/${diaryId}`);
+    return this.http.delete(`${this.ROOT_USER_URL}/${userId}/diaries/${diaryId}`);
   }
 }

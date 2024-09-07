@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 @Component({
   standalone: true,
-  selector: 'app-users',
+  selector: 'app-user',
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.css',
   imports: [NgFor, NgIf, RouterLink, ReactiveFormsModule],

@@ -4,10 +4,9 @@ import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { LoginUtil } from '../../utils/login-util';
 
-
 @Component({
   standalone: true,
-  selector: 'app-users',
+  selector: 'app-user',
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
   imports: [NgFor, NgIf, RouterLink],
@@ -29,7 +28,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    LoginUtil.checkLogin(this.platformId, this.router, '/users');
+    LoginUtil.checkLogin(this.platformId, this.router, '/user-list');
     this.title = "ユーザー一覧";
     this.getUsers();
   }

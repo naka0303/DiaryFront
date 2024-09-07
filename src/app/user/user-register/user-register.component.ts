@@ -7,7 +7,7 @@ import { UsersUtils } from '../user.utils';
 
 @Component({
   standalone: true,
-  selector: 'app-users',
+  selector: 'app-user',
   templateUrl: './user-register.component.html',
   styleUrl: './user-register.component.css',
   imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],

@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  selector: 'app-users',
+  selector: 'app-user',
   templateUrl: './logout.component.html',
   styleUrl: './logout.component.css',
   imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink, NgbModule],

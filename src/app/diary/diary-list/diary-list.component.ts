@@ -17,7 +17,6 @@ export class DiaryListComponent implements OnInit {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   title!: string;
-  registeredContents!: any;
   registeredDiary!: any;
   userId!: any;
   diaryId!: any;
@@ -37,7 +36,7 @@ export class DiaryListComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.userId = Number(localStorage.getItem("loginUserId"));
       setTimeout(() => {
-        this.getDiaries();
+        this.getDiariesByUser();
       }, 1000);
     }
   }
@@ -45,8 +44,8 @@ export class DiaryListComponent implements OnInit {
   /**
    * 指定されたユーザーに紐づく日記情報取得.
    */
-  getDiaries(): void {
-    this.diaryService.getDiaries(this.userId)
+  getDiariesByUser(): void {
+    this.diaryService.getDiariesByUser(this.userId)
       .subscribe((res: Diary) => {
         this.registeredDiary = res;
       });
@@ -64,7 +63,7 @@ export class DiaryListComponent implements OnInit {
           this.successFlg = true;
 
           if (this.successFlg) {
-            this.getDiaries();
+            this.getDiariesByUser();
           }
         }
       });
