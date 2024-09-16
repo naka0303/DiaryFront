@@ -1,5 +1,8 @@
 export class RegisterComment {
   diaryId!: number;
-  userId!: number;
+  commentFrom!: number;
   comment!: string;
+  createdAt!: string;
+  updatedAt!: string;
+  deletedAt!: string;
 }

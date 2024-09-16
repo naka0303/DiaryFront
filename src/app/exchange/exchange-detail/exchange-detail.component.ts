@@ -1,17 +1,17 @@
 import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { isPlatformBrowser, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { Diary } from '../../diary/diary';
 import { DiaryService } from '../../diary/diary.service';
-import { LoginUtil } from '../../utils/login-util';
 import { RegisterComment } from '../Comment';
 import { ExchangeService } from '../exchange.service';
+import { RegisterReply } from '../Reply';
 
 @Component({
   selector: 'app-exchange-detail',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, NgIf],
+  imports: [RouterLink, ReactiveFormsModule, NgIf, NgFor],
   templateUrl: './exchange-detail.component.html',
   styleUrl: './exchange-detail.component.css'
 })
@@ -26,9 +26,16 @@ export class ExchangeDetailComponent {
   diaryTitle!: string;
   diaryContent!: string;
   comment!: string;
+  replyComment!: string;
+  registeredComments!: any;
+  replyFlg = false;
+  commentId!: any;
 
   registerCommentForm = new FormGroup({
     comment: new FormControl('')
+  });
+  registerReplyForm = new FormGroup({
+    replyComment: new FormControl('')
   });
   
   constructor(
@@ -47,6 +54,7 @@ export class ExchangeDetailComponent {
         this.getDiaries();
       }, 100);
     }
+    this.onFindComments();
   }
 
   /**
@@ -66,6 +74,29 @@ export class ExchangeDetailComponent {
   }
 
   /**
+   * 返信するかどうかの切り替え.
+   */
+  switchReplyFlg(commentId: number) {
+    if (this.replyFlg) {
+      this.replyFlg = false;
+      this.commentId = null;
+    } else {
+      this.replyFlg = true;
+      this.commentId = commentId;
+    }
+  }
+
+  /**
+   * 指定された日記のコメント取得
+   * @param diaryId 
+   */
+  onFindComments() {
+    this.exchangeService.findComments(this.diaryId).subscribe(res => {
+      this.registeredComments = res;
+    });
+  }
+
+  /**
    * コメント投稿.
    * @param form 
    */
@@ -73,10 +104,36 @@ export class ExchangeDetailComponent {
     let comment = form.comment;
 
     var registerComment: RegisterComment = new RegisterComment();
-    registerComment.userId = this.userId;
+    registerComment.commentFrom = this.userId;
     registerComment.comment = comment;
 
     this.exchangeService.registerComment(this.diaryId, registerComment)
+      .subscribe(res => {
+        // TODO: ステータスコードの直書きはやめる
+        if (res === "OK") {
+          this.successFlg = true;
+
+          setTimeout(() => {
+            if (this.successFlg) {
+              this.router.navigate(['exchange-list']);
+            }
+          }, 2000);
+        }
+      });
+  }
+
+  /**
+   * コメント返信.
+   * @param form 
+   */
+  onRegisterReply(form: any) {
+    let replyComment = form.replyComment;
+
+    var registerReply: RegisterReply = new RegisterReply();
+    registerReply.replyFrom = this.userId;
+    registerReply.replyComment = replyComment;
+
+    this.exchangeService.registerReply(this.diaryId, this.commentId, registerReply)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {
