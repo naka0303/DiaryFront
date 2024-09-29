@@ -3,7 +3,7 @@ import { NgFor, NgIf, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginUtil } from '../../utils/login-util';
 import { DiaryService } from '../../diary/diary.service';
-import { Diary } from '../../diary/diary';
+import { DiaryLinkedUser } from '../../diary/diary';
 
 @Component({
   selector: 'app-exchange',
@@ -44,7 +44,7 @@ export class ExchangeListComponent implements OnInit {
    */
   getDiaries(): void {
     this.diaryService.getDiaries()
-      .subscribe((res: Diary) => {
+      .subscribe((res: DiaryLinkedUser) => {
         this.registeredDiary = res;
       });
   }

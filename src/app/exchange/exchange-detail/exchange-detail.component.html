@@ -24,13 +24,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let comment of registeredComments">
-      <th scope="row">{{ comment.commentId }}</th>
-      <td>{{ comment.comment }}</td>
-      <td>{{ comment.username }}</td>
-      <td>{{ comment.createdAt }}</td>
-      <td><input type="button" (click)="switchReplyFlg(comment.commentId)" value="返信"></td>
-    </tr>
+    <ng-container *ngFor="let comment of comments">
+      <tr>
+        <th scope="row">{{ comment.commentNo }}</th>
+        <td>{{ comment.content }}</td>
+        <td>{{ comment.username }}</td>
+        <td>{{ comment.createdAt }}</td>
+        <td><input type="button" (click)="switchReplyFlg(comment.commentNo, null)" value="返信"></td>
+      </tr>
+      <ng-container *ngFor="let reply of replies">
+        <ng-container *ngIf="comment.commentNo == reply.replyTo">
+          <tr>
+            <th scope="row">&nbsp;&nbsp;>>{{ reply.replyNo }}</th>
+            <td>{{ reply.content }}</td>
+            <td>{{ reply.username }}</td>
+            <td>{{ reply.createdAt }}</td>
+            <td></td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </tbody>
 </table>
 <form style="width: 100%;" [formGroup]="registerCommentForm" *ngIf="!replyFlg" (ngSubmit)="onRegisterComment(registerCommentForm.value)">
@@ -38,7 +51,7 @@
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label" *ngIf="!replyFlg">コメント内容：</label>
       <div class="col-sm-10">
-        <textarea class="form-control" rows="15" formControlName="comment"
+        <textarea class="form-control" rows="15" formControlName="content"
           style="width: 50%;"></textarea>
       </div>
     </div>
@@ -50,7 +63,7 @@
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label" *ngIf="replyFlg">返信内容：</label>
       <div class="col-sm-10">
-        <textarea class="form-control" rows="15" formControlName="replyComment"
+        <textarea class="form-control" rows="15" formControlName="content"
           style="width: 50%;"></textarea>
       </div>
     </div>

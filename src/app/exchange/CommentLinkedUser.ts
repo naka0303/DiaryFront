@@ -1,6 +1,10 @@
 export class FindCommentLinkedUser {
-  commentId!: number
   diaryId!: number;
+  commentNo!: number;
+  commentFrom!: number;
+  replyNo!: number;
+  replyTo!: number;
+  replyFrom!: number;
   userId!: number;
   username!: string;
   age!: number;

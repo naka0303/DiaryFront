@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { Diary } from '../../diary/diary';
 import { DiaryService } from '../../diary/diary.service';
-import { RegisterComment } from '../Comment';
 import { ExchangeService } from '../exchange.service';
 import { RegisterReply } from '../Reply';
+import { RegisterComment } from '../Comment';
 
 @Component({
   selector: 'app-exchange-detail',
@@ -25,17 +25,19 @@ export class ExchangeDetailComponent {
   successFlg!: boolean;
   diaryTitle!: string;
   diaryContent!: string;
-  comment!: string;
-  replyComment!: string;
-  registeredComments!: any;
+  content!: string;
+  registeredCommentsReplies!: any;
   replyFlg = false;
-  commentId!: any;
+  commentNo!: any;
+  replyNo!: any;
+  comments: any = [];
+  replies: any = [];
 
   registerCommentForm = new FormGroup({
-    comment: new FormControl('')
+    content: new FormControl('')
   });
   registerReplyForm = new FormGroup({
-    replyComment: new FormControl('')
+    content: new FormControl('')
   });
   
   constructor(
@@ -76,23 +78,31 @@ export class ExchangeDetailComponent {
   /**
    * 返信するかどうかの切り替え.
    */
-  switchReplyFlg(commentId: number) {
+  switchReplyFlg(commentNo: any, replyNo: any) {
     if (this.replyFlg) {
       this.replyFlg = false;
-      this.commentId = null;
+      this.commentNo = null;
     } else {
       this.replyFlg = true;
-      this.commentId = commentId;
+      this.commentNo = commentNo;
     }
   }
 
   /**
-   * 指定された日記のコメント取得
-   * @param diaryId 
+   * 指定された日記のコメントと返信を取得.
+   * @param diaryId 日記ID
    */
   onFindComments() {
-    this.exchangeService.findComments(this.diaryId).subscribe(res => {
-      this.registeredComments = res;
+    this.exchangeService.findCommentsReplies(this.diaryId).subscribe(res => {
+      this.registeredCommentsReplies = res;
+
+      for (let commentReply of this.registeredCommentsReplies) {
+        if (commentReply.commentNo != null) {
+          this.comments.push(commentReply);
+        } else {
+          this.replies.push(commentReply);
+        }
+      }
     });
   }
 
@@ -101,11 +111,11 @@ export class ExchangeDetailComponent {
    * @param form 
    */
   onRegisterComment(form: any) {
-    let comment = form.comment;
+    let content = form.content;
 
     var registerComment: RegisterComment = new RegisterComment();
     registerComment.commentFrom = this.userId;
-    registerComment.comment = comment;
+    registerComment.content = content;
 
     this.exchangeService.registerComment(this.diaryId, registerComment)
       .subscribe(res => {
@@ -127,13 +137,14 @@ export class ExchangeDetailComponent {
    * @param form 
    */
   onRegisterReply(form: any) {
-    let replyComment = form.replyComment;
+    let content = form.content;
 
     var registerReply: RegisterReply = new RegisterReply();
     registerReply.replyFrom = this.userId;
-    registerReply.replyComment = replyComment;
+    registerReply.replyTo = this.commentNo;
+    registerReply.content = content;
 
-    this.exchangeService.registerReply(this.diaryId, this.commentId, registerReply)
+    this.exchangeService.registerReply(this.diaryId, this.commentNo, registerReply)
       .subscribe(res => {
         // TODO: ステータスコードの直書きはやめる
         if (res === "OK") {

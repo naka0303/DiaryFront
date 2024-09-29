@@ -1,7 +1,8 @@
 export class RegisterReply {
-  commentId!: number;
+  replyNo!: number;
+  replyTo!: number;
   replyFrom!: number;
-  replyComment!: string;
+  content!: string;
   createdAt!: string;
   updatedAt!: string;
   deletedAt!: string;

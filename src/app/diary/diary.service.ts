@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { Diary } from "./diary";
+import { Diary, DiaryLinkedUser } from "./diary";
 
 @Injectable({providedIn: 'root'})
 export class DiaryService {
@@ -16,8 +16,8 @@ export class DiaryService {
    * 全ての日記情報取得
    * @returns 
    */
-  getDiaries(): Observable<Diary> {
-    return this.http.get<Diary>(`${this.ROOT_DIARY_URL}`);
+  getDiaries(): Observable<DiaryLinkedUser> {
+    return this.http.get<DiaryLinkedUser>(`${this.ROOT_DIARY_URL}`);
   }
 
   /**
